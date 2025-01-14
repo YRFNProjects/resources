@@ -1,0 +1,50 @@
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .iframe-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 65vw;
+            height: 85vh;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .button-container {
+            margin-top: 10px;
+        }
+        .back-button {
+            font-size: 18px;
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <h2>Latest Announcements</h2>
+    <div class="iframe-container">
+        <iframe src="https://docs.google.com/document/d/e/2PACX-1vTi_WIBHivc1k4MZmWQKkT6drNqlzDShXTid4sPzYSKjGXiegsNTbhGpTL5GeZITGsS9l809Du1_D-9/pub?embedded=true"></iframe>
+    </div>
+    <div class="button-container">
+        <a href="../" class="back-button">Back to Main Page</a>
+    </div>
+</html>

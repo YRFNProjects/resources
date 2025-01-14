@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Garden Announcements</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background: #28a745;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 1rem;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 2rem;
+        }
+        .announcement {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #e9f7ef;
+            border-left: 5px solid #28a745;
+            border-radius: 5px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .button {
+            text-decoration: none;
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+        .button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Community Garden Announcements</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Latest Announcements</h2>
+            <div id="announcements-container">
+                <!-- Announcements will load here -->
+            </div>
+        </section>
+        <footer>
+            <h2>Explore More</h2>
+            <div class="button-container">
+                <a href="https://yrfn.ca" class="button">YRFN Main Site</a>
+                <a href="subpage1/" class="button">Compost Guide</a>
+                <a href="subpage2/" class="button">Cover Crops</a>
+                <a href="subpage3/" class="button">Frequently Asked Questions</a>
+                <a href="announcement/" class="button">Announcement Page</a>
+            </div>
+        </footer>
+    </main>
+    
+    <script>
+        // Function to load announcements from a text file
+        async function loadAnnouncements() {
+            const response = await fetch('announcements.txt');
+            const container = document.getElementById('announcements-container');
+    
+            // Check if the response is valid
+            if (!response.ok) {
+                container.innerHTML = '<p>Unable to load announcements at this time.</p>';
+                return;
+            }
+    
+            const text = await response.text();
+            const lines = text.split('\n');
+            container.innerHTML = ''; // Clear any existing content
+    
+            lines.forEach(line => {
+                if (line.trim()) { // Skip empty lines
+                    const [date, message] = line.split('|');
+    
+                    // Process the message to convert {link} into clickable <a> tags
+                    const processedMessage = message.replace(/{(.*?)}/g, (match, p1) => {
+                        // Make the link clickable with proper href
+                        const url = p1.startsWith('http') ? p1 : `https://${p1}`;
+                        return `<a href="${url}" target="_blank">${p1}</a>`;
+                    });
+    
+                    const announcementDiv = document.createElement('div');
+                    announcementDiv.className = 'announcement';
+                    announcementDiv.innerHTML = `
+                        <p><strong>${date}:</strong></p>
+                        <p>${processedMessage}</p>
+                    `;
+                    container.appendChild(announcementDiv);
+                }
+            });
+        }
+    
+        // Load announcements on page load
+        document.addEventListener('DOMContentLoaded', loadAnnouncements);
+    </script>
+</body>
+</html>

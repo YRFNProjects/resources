@@ -13,25 +13,27 @@
             align-items: center;
             height: 100vh;
             background-color: #f4f4f4;
+            overflow-x: hidden; /* Prevents horizontal scrolling */
         }
         .iframe-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 75vh;
-            width: 85vw; /* Make it wider to avoid excessive text wrapping */
+            height: 85vh;
+            width: 100vw;
+            max-width: 100vw; /* Ensures no extra width */
             background: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 10px;
             overflow: hidden;
+            padding: 0;
         }
         iframe {
             width: 100%;
             height: 100%;
             border: none;
-            zoom: 0.8; /* Helps reduce over-zooming in some browsers */
-            transform: scale(0.85); /* Fine-tune zoom */
-            transform-origin: top left;
+            transform: scale(1);
+            transform-origin: top center;
         }
         .button-container {
             margin-top: 10px;
@@ -53,7 +55,7 @@
 <body>
     <h2>Latest Announcements</h2>
     <div class="iframe-container">
-        <iframe src="https://docs.google.com/document/d/e/2PACX-1vTi_WIBHivc1k4MZmWQKkT6drNqlzDShXTid4sPzYSKjGXiegsNTbhGpTL5GeZITGsS9l809Du1_D-9/pub?embedded=true" scrolling="yes"></iframe>
+        <iframe src="https://docs.google.com/document/d/e/2PACX-1vTi_WIBHivc1k4MZmWQKkT6drNqlzDShXTid4sPzYSKjGXiegsNTbhGpTL5GeZITGsS9l809Du1_D-9/pub?embedded=true" scrolling="no"></iframe>
     </div>
     <div class="button-container">
         <a href="../" class="back-button">Back to Main Page</a>

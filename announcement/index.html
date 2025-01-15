@@ -1,52 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Announcements</title>
     <style>
-        
-body {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-}
-.iframe-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 85vh;
-    width: calc(85vh / 1.294); /* Maintain aspect ratio */
-    background: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    overflow: hidden;
-}
-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-.button-container {
-    margin-top: 10px;
-}
-.back-button {
-    font-size: 18px;
-    text-decoration: none;
-    color: #333;
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-}
-.back-button:hover {
-    background-color: #0056b3;
-}
-
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .iframe-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 85vh;
+            width: 90vw; /* Make it wider to avoid excessive text wrapping */
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            zoom: 0.8; /* Helps reduce over-zooming in some browsers */
+            transform: scale(0.85); /* Fine-tune zoom */
+            transform-origin: top left;
+        }
+        .button-container {
+            margin-top: 10px;
+        }
+        .back-button {
+            font-size: 18px;
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
     </style>
+</head>
+<body>
     <h2>Latest Announcements</h2>
     <div class="iframe-container">
-        <iframe src="https://docs.google.com/document/d/e/2PACX-1vTi_WIBHivc1k4MZmWQKkT6drNqlzDShXTid4sPzYSKjGXiegsNTbhGpTL5GeZITGsS9l809Du1_D-9/pub?embedded=true"></iframe>
+        <iframe src="https://docs.google.com/document/d/e/2PACX-1vTi_WIBHivc1k4MZmWQKkT6drNqlzDShXTid4sPzYSKjGXiegsNTbhGpTL5GeZITGsS9l809Du1_D-9/pub?embedded=true" scrolling="yes"></iframe>
     </div>
     <div class="button-container">
         <a href="../" class="back-button">Back to Main Page</a>
     </div>
+</body>
 </html>

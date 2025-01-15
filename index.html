@@ -3,127 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Community Garden Announcements</title>
+    <title>Community Garden Hub</title>
     <style>
+        /* General Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f9;
             color: #333;
             line-height: 1.6;
+            text-align: center;
         }
+
+        /* Header */
         header {
             background: #28a745;
             color: white;
-            padding: 1rem 0;
+            padding: 2rem 1rem;
             text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
         main {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 1rem;
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 1.5rem;
             background: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        h1 {
+
+        h2 {
             font-size: 2rem;
+            margin-bottom: 20px;
+            color: #28a745;
         }
-        .announcement {
-            margin: 1rem 0;
-            padding: 1rem;
-            background: #e9f7ef;
-            border-left: 5px solid #28a745;
-            border-radius: 5px;
-        }
-        footer {
-            text-align: center;
-            margin-top: 2rem;
-        }
+
+        /* Button Grid */
         .button-container {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 10px;
             justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
         }
+
         .button {
-            text-decoration: none;
+            display: block;
+            padding: 15px;
             background: #007bff;
             color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: background 0.3s ease;
+            text-decoration: none;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         .button:hover {
             background: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 40px;
+            padding: 20px;
+            background: #333;
+            color: white;
+            text-align: center;
         }
     </style>
 </head>
 <body>
+
     <header>
-        <h1>Community Garden Announcements</h1>
+        <h1>Welcome to the Community Garden Hub</h1>
+        <p>Explore resources, guides, and announcements to grow a thriving garden.</p>
     </header>
+
     <main>
-        <section>
-            <h2>Latest Announcements</h2>
-            <div id="announcements-container">
-                <!-- Announcements will load here -->
-            </div>
-        </section>
-        <footer>
-            <h2>Explore More</h2>
-            <div class="button-container">
-                <a href="https://yrfn.ca" class="button">YRFN Main Site</a>
-                <a href="subpage1/" class="button">Compost Guide</a>
-                <a href="subpage2/" class="button">Cover Crops</a>
-                <a href="subpage3/" class="button">Frequently Asked Questions</a>
-                <a href="announcement/" class="button">Announcement Page</a>
-            </div>
-        </footer>
+        <h2>Explore Our Resources</h2>
+        <div class="button-container">
+            <a href="https://yrfn.ca" class="button">YRFN Main Site</a>
+            <a href="subpage1/" class="button">Compost Guide</a>
+            <a href="subpage2/" class="button">Cover Crops</a>
+            <a href="subpage3/" class="button">Frequently Asked Questions</a>
+            <a href="announcement/" class="button">Announcement Page</a>
+        </div>
     </main>
-    
-    <script>
-        // Function to load announcements from a text file
-        async function loadAnnouncements() {
-            const response = await fetch('announcements.txt');
-            const container = document.getElementById('announcements-container');
-    
-            // Check if the response is valid
-            if (!response.ok) {
-                container.innerHTML = '<p>Unable to load announcements at this time.</p>';
-                return;
-            }
-    
-            const text = await response.text();
-            const lines = text.split('\n');
-            container.innerHTML = ''; // Clear any existing content
-    
-            lines.forEach(line => {
-                if (line.trim()) { // Skip empty lines
-                    const [date, message] = line.split('|');
-    
-                    // Process the message to convert {link} into clickable <a> tags
-                    const processedMessage = message.replace(/{(.*?)}/g, (match, p1) => {
-                        // Make the link clickable with proper href
-                        const url = p1.startsWith('http') ? p1 : `https://${p1}`;
-                        return `<a href="${url}" target="_blank">${p1}</a>`;
-                    });
-    
-                    const announcementDiv = document.createElement('div');
-                    announcementDiv.className = 'announcement';
-                    announcementDiv.innerHTML = `
-                        <p><strong>${date}:</strong></p>
-                        <p>${processedMessage}</p>
-                    `;
-                    container.appendChild(announcementDiv);
-                }
-            });
-        }
-    
-        // Load announcements on page load
-        document.addEventListener('DOMContentLoaded', loadAnnouncements);
-    </script>
+
+    <footer>
+        <p>&copy; 2025 Community Garden Network. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>

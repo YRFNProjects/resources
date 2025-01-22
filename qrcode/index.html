@@ -172,7 +172,7 @@
             }
 
             // Generate the QR code
-            QRCode.toCanvas(qrCanvas, text, { width: 300, height: 300 }, (error) => {
+            QRCode.toCanvas(qrCanvas, text, { width: 600, height: 600 }, (error) => {
                 if (error) {
                     console.error(error);
                     alert("Error generating QR Code.");

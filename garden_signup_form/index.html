@@ -41,7 +41,7 @@
             background: white;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            height: 90vh; /* 80% of previous height */
+            min-height: 80vh; /* Use a minimum height */
         }
 
         /* Form Container */
@@ -51,9 +51,10 @@
             height: 100%;
         }
 
+        /* Responsive iframe */
         iframe {
             width: 100%;
-            height: 600px; /* 80% of previous iframe height */
+            height: 80vh; /* Adjust height to viewport height */
             border: none;
         }
 

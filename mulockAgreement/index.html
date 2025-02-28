@@ -44,16 +44,16 @@
             min-height: 80vh; /* Use a minimum height */
         }
 
-        /* Form Container */
+        /* Flex container for forms */
         #form-container {
-            padding: 20px;
-            text-align: center;
-            height: 100%;
+            display: flex;
+            justify-content: space-between; /* Space forms evenly */
+            gap: 20px; /* Space between the forms */
         }
 
-        /* Responsive iframe */
+        /* Form Styling (iframes) */
         iframe {
-            width: 100%;
+            width: 48%; /* Take up 48% of the container's width */
             height: 80vh; /* Adjust height to viewport height */
             border: none;
         }
@@ -78,9 +78,6 @@
     <main>
         <div id="form-container">
             <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=uwtaxn28Dk-lruheZjqtUbJjqiOFEOFHgfeSl0n_UxRUMTE1RUtGWUU0MFk4MlNGUUlEODdCWlgxMy4u&embed=true" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen></iframe>
-        </div>
-        
-        <div id="form-container">
             <iframe src="https://forms.office.com/Pages/ResponsePage.aspx?id=uwtaxn28Dk-lruheZjqtUbJjqiOFEOFHgfeSl0n_UxRUNkQzRDhQWldFN0xXRzQzNEtIVERKWDgxQi4u&embed=true" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen></iframe>
         </div>
     </main>

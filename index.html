@@ -145,6 +145,7 @@
     
         const buttonContainer = document.getElementById("button-container");
     
+        // Function to generate green gradient
         function generateGreenGradient(total, index) {
             const startColor = [20, 90, 50];
             const endColor = [108, 197, 152];
@@ -155,8 +156,9 @@
             return `rgb(${r},${g},${b})`;
         }
     
+        // Create buttons
         function createButtons() {
-            buttonContainer.innerHTML = "";
+            buttonContainer.innerHTML = ""; // Clear button container before re-populating
             buttons.forEach((button, index) => {
                 const btn = document.createElement("a");
                 btn.href = button.url;
@@ -166,15 +168,17 @@
     
                 btn.style.background = button.staff
                     ? "#aaa" // Gray for staff
-                    : generateGreenGradient(buttons.length, index);
+                    : generateGreenGradient(buttons.length, index); // Green gradient for resources
     
                 btn.style.border = "1px solid rgba(0, 0, 0, 0.2)";
                 buttonContainer.appendChild(btn);
             });
     
+            // Update visibility based on the checkbox state
             updateVisibility();
         }
     
+        // Update visibility of buttons based on checkbox state
         function updateVisibility() {
             const showResources = document.getElementById("toggleResources").checked;
             const showStaff = document.getElementById("toggleStaff").checked;
@@ -182,18 +186,22 @@
     
             allButtons.forEach(button => {
                 const isStaff = button.dataset.staff === "true";
-                button.style.display =
-                    (!isStaff && showResources) || (isStaff && showStaff) ? "block" : "none";
+                if ((!isStaff && showResources) || (isStaff && showStaff)) {
+                    button.style.display = "block"; // Show the button
+                } else {
+                    button.style.display = "none"; // Hide the button
+                }
             });
         }
     
-        // Setup
+        // Setup initial button display
         createButtons();
     
-        // Event listeners
+        // Event listeners to handle checkbox toggles
         document.getElementById("toggleResources").addEventListener("change", updateVisibility);
         document.getElementById("toggleStaff").addEventListener("change", updateVisibility);
     </script>
+
 
 <!--     <script>
         // Button links and names

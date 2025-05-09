@@ -105,29 +105,28 @@
     <script>
         // Button links and names
         const buttons = [
-            { text: "YRFN Main Site", url: "https://yrfn.ca" },
-            { text: "Community Garden Signup Form", url: "garden_signup_form/" },
-            { text: "Photo Release Form", url: "photoReleaseForm/" },
-            { text: "Mulock Agreement Form (staff only)", url: "mulockAgreement/" },
-            { text: "Aurora Agreement Form (staff only)", url: "auroraAgreement/" },
-            // { text: "QR-Code Generator (staff only)", url: "qrcode/" },
-            { text: "Seed Inventory", url: "seed_inventory/" },
-            { text: "Announcements", url: "" },
-            { text: "Microgreens", url: "pdfResources/microgreens.pdf" },
-            { text: "Sprouts", url: "pdfResources/sprouts.pdf" },
-
-            { text: "Compost Guide", url: "https://davidsuzuki.org/living-green/composting-dos-and-donts/" },
-            { text: "Cover Crops", url: "https://www.sare.org/resources/cover-crops/" },
-            { text: "Square Foot Gardening", url: "https://gardeninminutes.com/plant-spacing-chart-square-foot-gardening/?srsltid=AfmBOopJg6YXAxVsXGxtwAlSzb94vsUoWHJwRjeZB0YpPAykRFxtTCc9" },
-            { text: "Seed Germination Guide", url: "pdfResources/seed-starting-transplanting-guidelines.pdf" },
-            { text: "Grow Lights & Indoor Gardening", url: "pdfResources/grow-light-guide.pdf" },
-            { text: "Companion Planting", url: "pdfResources/Companion-Planting.pdf" },
-            { text: "Permaculture & Sustainable Gardening", url: "pdfResources/permaculture_basics_for_home_gardeners1.pdf" },
-            { text: "Organic Pest Control", url: "pdfResources/Organic Pest Management_FINAL.pdf" },
-            { text: "Watering & Irrigation", url: "pdfResources/WaterWise_Landscape_Irrigation_Handbook.pdf" },
-            { text: "Urban Gardening & Agriculture", url: "pdfResources/mcgill_guide_to_urban_agriculture.pdf" },
-            { text: "Soil Health & Amendments", url: "pdfResources/ASDA-soil-health-assessment-handbook-May-2020.pdf" },
-            { text: "Pollinator Gardens", url: "pdfResources/Pollinator-Plant-Guide.pdf" }
+            { text: "YRFN Main Site", url: "https://yrfn.ca", staff: false },
+            // { text: "QR-Code Generator (staff only)", url: "qrcode/", staff: true },
+            { text: "Community Garden Signup Form", url: "garden_signup_form/", staff: true },
+            { text: "Photo Release Form", url: "photoReleaseForm/", staff: true },
+            { text: "Mulock Agreement Form (staff only)", url: "mulockAgreement/", staff: true },
+            { text: "Aurora Agreement Form (staff only)", url: "auroraAgreement/", staff: true },
+            { text: "Seed Inventory", url: "seed_inventory/", staff: false },
+            { text: "Announcements", url: "", staff: false },
+            { text: "Microgreens", url: "pdfResources/microgreens.pdf", staff: false },
+            { text: "Sprouts", url: "pdfResources/sprouts.pdf", staff: false },
+            { text: "Compost Guide", url: "https://davidsuzuki.org/living-green/composting-dos-and-donts/", staff: false },
+            { text: "Cover Crops", url: "https://www.sare.org/resources/cover-crops/", staff: false },
+            { text: "Square Foot Gardening", url: "https://gardeninminutes.com/plant-spacing-chart-square-foot-gardening/", staff: false },
+            { text: "Seed Germination Guide", url: "pdfResources/seed-starting-transplanting-guidelines.pdf", staff: false },
+            { text: "Grow Lights & Indoor Gardening", url: "pdfResources/grow-light-guide.pdf", staff: false },
+            { text: "Companion Planting", url: "pdfResources/Companion-Planting.pdf", staff: false },
+            { text: "Permaculture & Sustainable Gardening", url: "pdfResources/permaculture_basics_for_home_gardeners1.pdf", staff: false },
+            { text: "Organic Pest Control", url: "pdfResources/Organic Pest Management_FINAL.pdf", staff: false },
+            { text: "Watering & Irrigation", url: "pdfResources/WaterWise_Landscape_Irrigation_Handbook.pdf", staff: false },
+            { text: "Urban Gardening & Agriculture", url: "pdfResources/mcgill_guide_to_urban_agriculture.pdf", staff: false },
+            { text: "Soil Health & Amendments", url: "pdfResources/ASDA-soil-health-assessment-handbook-May-2020.pdf", staff: false },
+            { text: "Pollinator Gardens", url: "pdfResources/Pollinator-Plant-Guide.pdf", staff: false }
         ];
 
         // Function to generate a gradient from dark to light green
@@ -150,7 +149,11 @@
             btn.href = button.url;
             btn.textContent = button.text;
             btn.className = "button";
-            btn.style.background = generateGreenGradient(buttons.length, index);
+            // btn.style.background = generateGreenGradient(buttons.length, index);
+            btn.style.background = button.staff
+                ? generateGreenGradient(buttons.length, index)
+                : "rgb(100, 100, 100)"; // Light green for resources
+
             btn.style.border = "1px solid rgba(0, 0, 0, 0.2)";
             buttonContainer.appendChild(btn);
         });

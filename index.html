@@ -107,7 +107,7 @@
     <h2>Explore Our Tools</h2>
 
     <button class="accordion-button" onclick="toggleAccordion('staff')">Staff Tools</button>
-    <div id="staff" style="display: none;" class="accordion-content button-container"></div>
+    <div id="staff" style="display: none; background-color: #646464;" class="accordion-content button-container"></div>
 
     <button class="accordion-button" onclick="toggleAccordion('resources')">Resources</button>
     <div id="resources" class="accordion-content button-container"></div>
@@ -179,10 +179,10 @@
         btn.className = "button";
   
         // Gray gradient for staff tools
-        // let startColor = [100, 100, 100];
-        // let endColor = [125, 125, 125];
-        let startColor = [40, 110, 70];
-        let endColor = [108, 197, 152];
+        let startColor = [100, 100, 100];
+        let endColor = [125, 125, 125];
+        // let startColor = [40, 110, 70];
+        // let endColor = [108, 197, 152];
         btn.style.background = generateGradient(staffButtons.length, i, startColor, endColor);
   
         staffContainer.appendChild(btn);

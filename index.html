@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,6 +60,11 @@
       margin-top: 15px;
     }
 
+    /* ✅ Staff button override */
+    .accordion-button.staff-button {
+      background-color: #646464;
+    }
+
     .accordion-content {
       display: none;
       padding: 15px 0;
@@ -82,7 +85,7 @@
       border-radius: 8px;
       transition: 0.3s ease-in-out;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      background: #28a745;
+      background: #28a745; /* fallback default */
     }
 
     .button:hover {
@@ -106,8 +109,9 @@
   <main>
     <h2>Explore Our Tools</h2>
 
-    <button class="accordion-button" onclick="toggleAccordion('staff')">Staff Tools</button>
-    <div id="staff" style="display: none; background-color: #646464;" class="accordion-content button-container"></div>
+    <!-- ✅ Added staff-button class -->
+    <button class="accordion-button staff-button" onclick="toggleAccordion('staff')">Staff Tools</button>
+    <div id="staff" style="display: none;" class="accordion-content button-container"></div>
 
     <button class="accordion-button" onclick="toggleAccordion('resources')">Resources</button>
     <div id="resources" class="accordion-content button-container"></div>
@@ -142,12 +146,11 @@
       { text: "Pollinator Gardens", url: "pdfResources/Pollinator-Plant-Guide.pdf", staff: false }
     ];
   
-    // Helper: Count staff and resource buttons
     const staffButtons = buttons.filter(b => b.staff);
     const resourceButtons = buttons.filter(b => !b.staff);
   
     function generateGradient(total, index, startColor, endColor) {
-      let ratio = total <= 1 ? 0 : index / (total - 1); // Avoid division by zero
+      let ratio = total <= 1 ? 0 : index / (total - 1);
       let r = Math.round(startColor[0] + ratio * (endColor[0] - startColor[0]));
       let g = Math.round(startColor[1] + ratio * (endColor[1] - startColor[1]));
       let b = Math.round(startColor[2] + ratio * (endColor[2] - startColor[2]));
@@ -163,12 +166,11 @@
         btn.href = button.url;
         btn.textContent = button.text;
         btn.className = "button";
-  
-        // Green gradient for resources
+
+        // ✅ Green gradient
         let startColor = [40, 110, 70];
         let endColor = [108, 197, 152];
         btn.style.background = generateGradient(resourceButtons.length, i, startColor, endColor);
-  
         resourceContainer.appendChild(btn);
       });
   
@@ -177,14 +179,11 @@
         btn.href = button.url;
         btn.textContent = button.text;
         btn.className = "button";
-  
-        // Gray gradient for staff tools
+
+        // ✅ Gray gradient
         let startColor = [100, 100, 100];
         let endColor = [125, 125, 125];
-        // let startColor = [40, 110, 70];
-        // let endColor = [108, 197, 152];
         btn.style.background = generateGradient(staffButtons.length, i, startColor, endColor);
-  
         staffContainer.appendChild(btn);
       });
     }
@@ -197,6 +196,5 @@
     populateButtons();
     document.getElementById('resources').style.display = "grid";
   </script>
-  
 </body>
 </html>

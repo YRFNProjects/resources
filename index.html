@@ -1,225 +1,575 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="qrcode/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title>York Region Food Network · Resource Hub</title>
+<style>
+  :root {
+    --leaf:    #2D6A4F;
+    --sprout:  #52B788;
+    --meadow:  #95D5B2;
+    --soil:    #3D2B1F;
+    --bark:    #7B5E52;
+    --cream:   #F8F5EE;
+    --fog:     rgba(255,255,255,0.72);
+    --slate:   #4A5A52;
+    --stone:   #6B7B71;
+    --amber:   #D4A853;
+    --shadow:  0 4px 24px rgba(45,106,79,0.10);
+  }
 
-  <link rel="icon" type="image/png" href="qrcode/logo.png">
-  
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f9;
-      color: #333;
-      text-align: center;
-    }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    header {
-      background: #28a745;
-      color: white;
-      padding: 2rem 1rem;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--soil);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3.5rem 1.5rem 3rem;
+    overflow: hidden;
+    background: var(--leaf);
+  }
 
-    header p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-    }
+  /* animated leaf-pattern SVG background */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cellipse cx='60' cy='60' rx='18' ry='36' fill='none' stroke='%2352B788' stroke-width='1.2' opacity='0.25' transform='rotate(-30,60,60)'/%3E%3Cellipse cx='60' cy='60' rx='18' ry='36' fill='none' stroke='%2352B788' stroke-width='1.2' opacity='0.18' transform='rotate(30,60,60)'/%3E%3Ccircle cx='60' cy='60' r='3' fill='%2395D5B2' opacity='0.3'/%3E%3C/svg%3E");
+    background-size: 120px 120px;
+    opacity: 1;
+  }
 
-    /* Make main container semi-transparent */
-    main {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 1.5rem;
-      background: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      position: relative; /* Make sure it stacks above the iframe */
-      z-index: 1;
-    }
+  .hero-logo {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.35);
+    object-fit: cover;
+    margin-bottom: 1.25rem;
+    position: relative;
+    background: rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+  }
 
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 10px;
-      color: #28a745;
-    }
+  .logo-img {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 3px solid rgba(255,255,255,0.35);
+    object-fit: cover;
+    margin-bottom: 1.25rem;
+    position: relative;
+  }
 
-    .accordion-button {
-      background-color: #28a745;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      width: 100%;
-      font-size: 1.2rem;
-      text-align: left;
-      cursor: pointer;
-      outline: none;
-      transition: 0.3s;
-      border-radius: 5px;
-      margin-top: 15px;
-    }
+  .hero-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--meadow);
+    margin-bottom: 0.6rem;
+    position: relative;
+  }
 
-    /* ✅ Staff button override */
-    .accordion-button.staff-button {
-      background-color: #646464;
-    }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 1.12;
+    position: relative;
+    max-width: 700px;
+  }
 
-    .accordion-content {
-      display: none;
-      padding: 15px 0;
-    }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--meadow);
+  }
 
-    /* Make button container transparent as well */
-    .button-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      background: rgba(255, 255, 255, 0.6); /* Light transparent background */
-      border-radius: 8px;
-    }
+  .hero-sub {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.78);
+    max-width: 520px;
+    line-height: 1.6;
+    position: relative;
+  }
 
-    .button {
-      display: block;
-      padding: 15px;
-      text-decoration: none;
-      color: white;
-      font-size: 1.1rem;
-      border-radius: 8px;
-      transition: 0.3s ease-in-out;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      background: #28a745; /* fallback default */
-    }
+  /* ── SEARCH BAR ── */
+  .search-wrap {
+    padding: 1.5rem 1.5rem 0;
+    max-width: 860px;
+    margin: 0 auto;
+  }
 
-    .button:hover {
-      transform: translateY(-3px);
-    }
+  .search-inner {
+    position: relative;
+  }
 
-    footer {
-      margin-top: 40px;
-      padding: 20px;
-      background: #333;
-      color: white;
-    }
-  </style>
+  .search-inner svg {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--stone);
+    pointer-events: none;
+  }
 
-  <iframe
-    src="https://yrfnprojects.github.io/background1/" 
-    style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; border: none;">
-  </iframe>
-  
+  #search {
+    width: 100%;
+    padding: 0.85rem 1rem 0.85rem 2.8rem;
+    border-radius: 10px;
+    border: 1.5px solid #d0ddd6;
+    background: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--soil);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(45,106,79,0.06);
+  }
+
+  #search:focus {
+    border-color: var(--sprout);
+    box-shadow: 0 0 0 3px rgba(82,183,136,0.18);
+  }
+
+  #search::placeholder { color: var(--stone); }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 860px;
+    margin: 1.5rem auto 3rem;
+    padding: 0 1.5rem;
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 2rem 0 1rem;
+  }
+
+  .section-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    flex-shrink: 0;
+  }
+
+  .section-icon.green { background: #e8f5ee; }
+  .section-icon.grey  { background: #eef0ee; }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--soil);
+  }
+
+  .section-header .badge {
+    margin-left: auto;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    padding: 0.25rem 0.65rem;
+    border-radius: 20px;
+    background: #e8f5ee;
+    color: var(--leaf);
+  }
+
+  .section-header .badge.grey {
+    background: #eef0ee;
+    color: var(--slate);
+  }
+
+  /* ── TOGGLE ── */
+  .section-toggle {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .chevron {
+    transition: transform 0.25s ease;
+    color: var(--stone);
+    margin-left: 0.4rem;
+  }
+
+  .chevron.open { transform: rotate(180deg); }
+
+  /* ── GRID ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.85rem;
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.3s ease;
+  }
+
+  .card-grid.collapsed {
+    max-height: 0 !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    text-decoration: none;
+    background: #fff;
+    border: 1.5px solid #e3ece7;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    border-radius: 2px 0 0 2px;
+    background: var(--sprout);
+    opacity: 0;
+    transition: opacity 0.18s;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(45,106,79,0.12);
+    border-color: var(--sprout);
+  }
+
+  .card:hover::after { opacity: 1; }
+
+  .card.staff-card::after { background: var(--bark); }
+  .card.staff-card:hover { border-color: var(--bark); box-shadow: 0 6px 20px rgba(123,94,82,0.12); }
+
+  .card-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 7px;
+    background: #e8f5ee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .staff-card .card-icon { background: #eef0ee; }
+
+  .card-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--soil);
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  .card-arrow {
+    color: var(--stone);
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: opacity 0.18s, transform 0.18s;
+    align-self: center;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+
+  /* hidden state from search */
+  .card.hidden { display: none; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1.5px solid #e3ece7;
+    margin: 2.5rem 0 0;
+  }
+
+  /* ── STAFF SECTION GATE ── */
+  .staff-note {
+    font-size: 0.8rem;
+    color: var(--stone);
+    margin-top: 0.25rem;
+    font-style: italic;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--soil);
+    color: rgba(255,255,255,0.65);
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 0.82rem;
+  }
+
+  footer a {
+    color: var(--meadow);
+    text-decoration: none;
+  }
+
+  footer a:hover { text-decoration: underline; }
+
+  /* ── NO RESULTS ── */
+  #no-results {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--stone);
+    display: none;
+  }
+
+  #no-results svg { margin-bottom: 0.75rem; opacity: 0.4; }
+  #no-results p  { font-size: 0.95rem; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 560px) {
+    .card-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 380px) {
+    .card-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── REDUCED MOTION ── */
+  @media (prefers-reduced-motion: reduce) {
+    .card, .card-grid, .chevron { transition: none; }
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>Welcome to the York Region Food Network Resource Hub</h1>
-    <p>Explore resources, guides, and announcements to grow a thriving garden!</p>
-  </header>
 
-  <main>
-    <h2>Explore Our Tools</h2>
-    
-    <button class="accordion-button" onclick="toggleAccordion('resources')">Resources</button>
-    <div id="resources" class="accordion-content button-container"></div>
-    
-    <!-- ✅ Added staff-button class -->
-    <button class="accordion-button staff-button" onclick="toggleAccordion('staff')">Staff Tools</button>
-    <div id="staff" style="display: none;" class="accordion-content button-container"></div>
-  </main>
+<!-- HERO -->
+<header class="hero">
+  <img class="logo-img" src="qrcode/logo.png" alt="YRFN Logo"
+       onerror="this.style.display='none'; document.querySelector('.hero-logo-fallback').style.display='flex'">
+  <div class="hero-logo hero-logo-fallback" style="display:none">🌱</div>
+  <p class="hero-eyebrow">York Region Food Network</p>
+  <h1>Your Community Garden <em>Resource Hub</em></h1>
+  <p class="hero-sub">Everything you need to grow, connect, and thrive — forms, guides, and tools in one place.</p>
+</header>
 
-  <footer>
-    <p>&copy; 2025 York Region Food Network Resource Hub.</p>
-  </footer>
+<!-- SEARCH -->
+<div class="search-wrap">
+  <div class="search-inner">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input type="search" id="search" placeholder="Search resources…" aria-label="Search resources">
+  </div>
+</div>
 
-  <script>
-    const buttons = [
-      { text: "YRFN Main Site", url: "https://yrfn.ca", staff: false },
-      { text: "Community Garden Signup Form", url: "garden_signup_form/", staff: false },
-      
-      { text: "Policy Meeting Scheduler (Mulock)", url: "cg_policy_meeting_scheduler_mulock/", staff: true },
-      { text: "Policy Meeting Scheduler (Aurora)", url: "cg_policy_meeting_scheduler/", staff: true },
-      
-      { text: "Plot Check Form (Aurora)", url: "plot_check_form_aurora/", staff: true },
-      { text: "Plot Check Form (Mulock)", url: "plot_check_form_mulock/", staff: true },
-      
-      { text: "Mulock Agreement Form 2026", url: "mulockAgreement/", staff: true },
-      { text: "Aurora Agreement Form 2026", url: "auroraAgreement/", staff: true },
-      { text: "London & Main Agreement Form 2026", url: "londonMainAgreement/", staff: true },
-      
-      { text: "Photo Release Form", url: "photoReleaseForm/", staff: true },
-      { text: "Incident Report Form", url: "incidentReportForm/", staff: true },
-      { text: "Seed Inventory", url: "seed_inventory/", staff: false },
-      { text: "Announcements", url: "", staff: false },
-      { text: "Microgreens", url: "pdfResources/microgreens.pdf", staff: false },
-      { text: "Sprouts", url: "pdfResources/sprouts.pdf", staff: false },
-      { text: "Compost Guide", url: "https://davidsuzuki.org/living-green/composting-dos-and-donts/", staff: false },
-      { text: "Cover Crops", url: "https://www.sare.org/resources/cover-crops/", staff: false },
-      { text: "Square Foot Gardening", url: "https://gardeninminutes.com/plant-spacing-chart-square-foot-gardening/", staff: false },
-      { text: "Seed Germination Guide", url: "pdfResources/seed-starting-transplanting-guidelines.pdf", staff: false },
-      { text: "Grow Lights & Indoor Gardening", url: "pdfResources/grow-light-guide.pdf", staff: false },
-      { text: "Companion Planting", url: "pdfResources/Companion-Planting.pdf", staff: false },
-      { text: "Permaculture & Sustainable Gardening", url: "pdfResources/permaculture_basics_for_home_gardeners1.pdf", staff: false },
-      { text: "Organic Pest Control", url: "pdfResources/Organic Pest Management_FINAL.pdf", staff: false },
-      { text: "Watering & Irrigation", url: "pdfResources/WaterWise_Landscape_Irrigation_Handbook.pdf", staff: false },
-      { text: "Urban Gardening & Agriculture", url: "pdfResources/mcgill_guide_to_urban_agriculture.pdf", staff: false },
-      { text: "Soil Health & Amendments", url: "pdfResources/ASDA-soil-health-assessment-handbook-May-2020.pdf", staff: false },
-      { text: "Pollinator Gardens", url: "pdfResources/Pollinator-Plant-Guide.pdf", staff: false }
-    ];
-  
-    const staffButtons = buttons.filter(b => b.staff);
-    const resourceButtons = buttons.filter(b => !b.staff);
-  
-    function generateGradient(total, index, startColor, endColor) {
-      let ratio = total <= 1 ? 0 : index / (total - 1);
-      let r = Math.round(startColor[0] + ratio * (endColor[0] - startColor[0]));
-      let g = Math.round(startColor[1] + ratio * (endColor[1] - startColor[1]));
-      let b = Math.round(startColor[2] + ratio * (endColor[2] - startColor[2]));
-      return `rgb(${r},${g},${b})`;
+<!-- MAIN CONTENT -->
+<main>
+
+  <!-- RESOURCES SECTION -->
+  <div class="section-header section-toggle" onclick="toggleSection('res-grid', this)" role="button" tabindex="0" aria-expanded="true">
+    <div class="section-icon green">🌿</div>
+    <h2>Resources</h2>
+    <span class="badge" id="res-count"></span>
+    <svg class="chevron open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </div>
+
+  <div class="card-grid" id="res-grid">
+    <!-- populated by JS -->
+  </div>
+
+  <hr class="divider">
+
+  <!-- STAFF SECTION -->
+  <div class="section-header section-toggle" onclick="toggleSection('staff-grid', this)" role="button" tabindex="0" aria-expanded="false">
+    <div class="section-icon grey">🔒</div>
+    <h2>Staff Tools</h2>
+    <span class="badge grey" id="staff-count"></span>
+    <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </div>
+  <p class="staff-note">Internal forms and scheduling tools for YRFN team members.</p>
+
+  <div class="card-grid collapsed" id="staff-grid">
+    <!-- populated by JS -->
+  </div>
+
+  <div id="no-results">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <p>No resources match your search. Try a different keyword.</p>
+  </div>
+
+</main>
+
+<footer>
+  <p>&copy; 2025 <a href="https://yrfn.ca" target="_blank" rel="noopener">York Region Food Network</a> · Resource Hub</p>
+</footer>
+
+<script>
+const RESOURCES = [
+  { text: "YRFN Main Site",              url: "https://yrfn.ca",                           icon: "🏠", staff: false },
+  { text: "Community Garden Signup",     url: "garden_signup_form/",                       icon: "✍️", staff: false },
+  { text: "Seed Inventory",              url: "seed_inventory/",                           icon: "🌰", staff: false },
+  { text: "Announcements",               url: "announcement/",                             icon: "📢", staff: false },
+  { text: "Microgreens Guide",           url: "pdfResources/microgreens.pdf",              icon: "🌱", staff: false },
+  { text: "Sprouts Guide",               url: "pdfResources/sprouts.pdf",                  icon: "🌿", staff: false },
+  { text: "Compost Guide",               url: "https://davidsuzuki.org/living-green/composting-dos-and-donts/", icon: "♻️", staff: false },
+  { text: "Cover Crops",                 url: "https://www.sare.org/resources/cover-crops/", icon: "🌾", staff: false },
+  { text: "Square Foot Gardening",       url: "https://gardeninminutes.com/plant-spacing-chart-square-foot-gardening/", icon: "📐", staff: false },
+  { text: "Seed Germination Guide",      url: "pdfResources/seed-starting-transplanting-guidelines.pdf", icon: "🫘", staff: false },
+  { text: "Grow Lights & Indoor Gardening", url: "pdfResources/grow-light-guide.pdf",     icon: "💡", staff: false },
+  { text: "Companion Planting",          url: "pdfResources/Companion-Planting.pdf",       icon: "🤝", staff: false },
+  { text: "Permaculture & Sustainable Gardening", url: "pdfResources/permaculture_basics_for_home_gardeners1.pdf", icon: "🔄", staff: false },
+  { text: "Organic Pest Control",        url: "pdfResources/Organic Pest Management_FINAL.pdf", icon: "🐛", staff: false },
+  { text: "Watering & Irrigation",       url: "pdfResources/WaterWise_Landscape_Irrigation_Handbook.pdf", icon: "💧", staff: false },
+  { text: "Urban Gardening & Agriculture", url: "pdfResources/mcgill_guide_to_urban_agriculture.pdf", icon: "🏙️", staff: false },
+  { text: "Soil Health & Amendments",    url: "pdfResources/ASDA-soil-health-assessment-handbook-May-2020.pdf", icon: "🪱", staff: false },
+  { text: "Pollinator Gardens",          url: "pdfResources/Pollinator-Plant-Guide.pdf",   icon: "🐝", staff: false },
+
+  { text: "Policy Meeting Scheduler (Aurora)", url: "cg_policy_meeting_scheduler/",        icon: "📅", staff: true },
+  { text: "Policy Meeting Scheduler (Mulock)", url: "cg_policy_meeting_scheduler_mulock/", icon: "📅", staff: true },
+  { text: "Plot Check Form (Aurora)",    url: "plot_check_form_aurora/",                   icon: "📋", staff: true },
+  { text: "Plot Check Form (Mulock)",    url: "plot_check_form_mulock/",                   icon: "📋", staff: true },
+  { text: "Mulock Agreement Form 2026",  url: "mulockAgreement/",                          icon: "📝", staff: true },
+  { text: "Aurora Agreement Form 2026",  url: "auroraAgreement/",                          icon: "📝", staff: true },
+  { text: "London & Main Agreement 2026", url: "londonMainAgreement/",                     icon: "📝", staff: true },
+  { text: "Photo Release Form",          url: "photoReleaseForm/",                          icon: "📸", staff: true },
+  { text: "Incident Report Form",        url: "incidentReportForm/",                        icon: "⚠️",  staff: true },
+];
+
+function makeCard(item) {
+  const a = document.createElement('a');
+  a.href = item.url || '#';
+  a.className = 'card' + (item.staff ? ' staff-card' : '');
+  a.setAttribute('data-label', item.text.toLowerCase());
+  if (!item.url) a.style.opacity = '0.45';
+  a.innerHTML = `
+    <span class="card-icon">${item.icon}</span>
+    <span class="card-label">${item.text}</span>
+    <span class="card-arrow">›</span>
+  `;
+  return a;
+}
+
+const resGrid   = document.getElementById('res-grid');
+const staffGrid = document.getElementById('staff-grid');
+const resCount  = document.getElementById('res-count');
+const staffCount = document.getElementById('staff-count');
+
+const resItems   = RESOURCES.filter(r => !r.staff);
+const staffItems = RESOURCES.filter(r =>  r.staff);
+
+resItems.forEach(item => resGrid.appendChild(makeCard(item)));
+staffItems.forEach(item => staffGrid.appendChild(makeCard(item)));
+
+resCount.textContent   = resItems.length + ' items';
+staffCount.textContent = staffItems.length + ' items';
+
+// grid heights for smooth animation
+function setGridHeight(grid) {
+  grid.style.maxHeight = grid.scrollHeight + 'px';
+}
+setGridHeight(resGrid);
+// staff starts collapsed, height will be set on open
+
+function toggleSection(id, header) {
+  const grid    = document.getElementById(id);
+  const chevron = header.querySelector('.chevron');
+  const isOpen  = !grid.classList.contains('collapsed');
+
+  if (isOpen) {
+    grid.style.maxHeight = grid.scrollHeight + 'px'; // pin before collapsing
+    requestAnimationFrame(() => {
+      grid.classList.add('collapsed');
+      grid.style.maxHeight = '0';
+      chevron.classList.remove('open');
+      header.setAttribute('aria-expanded', 'false');
+    });
+  } else {
+    grid.classList.remove('collapsed');
+    grid.style.maxHeight = grid.scrollHeight + 'px';
+    grid.style.opacity   = '1';
+    chevron.classList.add('open');
+    header.setAttribute('aria-expanded', 'true');
+  }
+}
+
+// keyboard support for toggles
+document.querySelectorAll('.section-toggle').forEach(el => {
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      el.click();
     }
-  
-    function populateButtons() {
-      const resourceContainer = document.getElementById('resources');
-      const staffContainer = document.getElementById('staff');
-  
-      resourceButtons.forEach((button, i) => {
-        const btn = document.createElement("a");
-        btn.href = button.url;
-        btn.textContent = button.text;
-        btn.className = "button";
+  });
+});
 
-        // ✅ Green gradient
-        let startColor = [40, 110, 70];
-        let endColor = [108, 197, 152];
-        btn.style.background = generateGradient(resourceButtons.length, i, startColor, endColor);
-        resourceContainer.appendChild(btn);
-      });
-  
-      staffButtons.forEach((button, i) => {
-        const btn = document.createElement("a");
-        btn.href = button.url;
-        btn.textContent = button.text;
-        btn.className = "button";
+// search
+const searchInput  = document.getElementById('search');
+const noResults    = document.getElementById('no-results');
+const allCards     = document.querySelectorAll('.card');
+const resHeader    = document.querySelector('[onclick*="res-grid"]');
+const staffHeader  = document.querySelector('[onclick*="staff-grid"]');
 
-        // ✅ Gray gradient
-        let startColor = [100, 100, 100];
-        let endColor = [125, 125, 125];
-        btn.style.background = generateGradient(staffButtons.length, i, startColor, endColor);
-        staffContainer.appendChild(btn);
-      });
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  let resVisible = 0, staffVisible = 0;
+
+  allCards.forEach(card => {
+    const match = !q || card.dataset.label.includes(q);
+    card.classList.toggle('hidden', !match);
+    if (match) {
+      if (card.classList.contains('staff-card')) staffVisible++;
+      else resVisible++;
     }
-  
-    function toggleAccordion(id) {
-      const section = document.getElementById(id);
-      section.style.display = section.style.display === "grid" ? "none" : "grid";
-    }
-  
-    populateButtons();
-    document.getElementById('resources').style.display = "grid";
-  </script>
+  });
+
+  // auto-expand sections with results
+  if (q) {
+    if (resVisible > 0 && resGrid.classList.contains('collapsed')) toggleSection('res-grid', resHeader);
+    if (staffVisible > 0 && staffGrid.classList.contains('collapsed')) toggleSection('staff-grid', staffHeader);
+  }
+
+  // update counts
+  resCount.textContent   = (q ? resVisible   : resItems.length)   + ' items';
+  staffCount.textContent = (q ? staffVisible : staffItems.length) + ' items';
+
+  noResults.style.display = (resVisible + staffVisible === 0 && q) ? 'block' : 'none';
+});
+</script>
 </body>
 </html>
